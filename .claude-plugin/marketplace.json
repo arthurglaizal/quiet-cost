@@ -1,0 +1,16 @@
+{
+  "name": "quiet-cost",
+  "owner": {
+    "name": "Arthur Glaizal"
+  },
+  "plugins": [
+    {
+      "name": "quiet-cost",
+      "source": "./",
+      "description": "What each reply cost, in one quiet grey line under it: an estimated price in dollars, how long it took and the tokens, and more figures you pick. /quiet-cost opens the row that picks them."
+    }
+  ],
+  "metadata": {
+    "description": "Quiet Cost: what each reply cost, under the reply."
+  }
+}
