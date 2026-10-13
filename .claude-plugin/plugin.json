@@ -1,6 +1,6 @@
 {
   "name": "quiet-cost",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "What each reply cost, in one quiet grey line under it: an estimated price in dollars, how long it took and the tokens, and more figures you pick. /quiet-cost opens the row that picks them.",
   "author": {
     "name": "Arthur Glaizal",

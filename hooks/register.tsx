@@ -4,12 +4,10 @@ import type { EngineInterface, Register } from 'claude-code'
 import type { Cost, Effort, Field } from '../types'
 
 const COMMAND = 'quiet-cost'
-// The design shared with the other Quiet mods: neutral greys, color only as a signal.
+// The design shared with the other Quiet mods: neutral greys; this line stays grey whatever the price.
 const FONTS = "-apple-system, 'SF Pro Text', system-ui, sans-serif"
 const LINE_FONT = 12 // as Quiet Model's signature, so the two lines read alike when stacked
 const COLOR = '#6e6e73' // a step under the text grey, as the app's own context lines
-const WARM = '#e08a3c'
-const HOT = '#e5534b'
 const CHAR_WIDTH = 6.1 // a character's width at FONT, an estimate
 const GAP = 10 // air above the line, so it reads apart from the reply
 const PX_PER_COLUMN = 8.4
@@ -72,10 +70,6 @@ const ALL_FIELDS = FIELDS.map(f => f.key)
 // A short line at first; the model is left out as Quiet Model already names it under each reply.
 const DEFAULT_FIELDS: Field[] = ['usd', 'time', 'tokens']
 const ARROW = { left: '\u2039', right: '\u203A' } // ‹ ›, to move a figure along the line
-
-// A reply's price takes color past these, as a signal that it weighed.
-const USD_WARM = 1
-const USD_HOT = 5
 
 // Session values: the turn in progress, and the end of each recent reply with what it cost, kept as
 // short tails so the reply drawn is found again. The text of a reply is not stored.
@@ -535,11 +529,9 @@ export function count(n: number) {
 }
 const trim = (s: string) => s.replace(/\.0$/, '')
 
-const heat = (value: number, warm: number, hot: number) => (value >= hot ? HOT : value >= warm ? WARM : undefined)
-
 export type Span = { text: string; color?: string }
 
-// The line as spans, the figures shown in their order: grey, the price alone in color when it weighed. A
+// The line as spans, the figures shown in their order, all grey. A
 // figure with nothing to say (no tool call, no edit) is left out; the subagents are counted even at zero.
 export function spansOf(cost: Cost, shown: readonly Field[] = DEFAULT_FIELDS): Span[] {
   const groups = shown.flatMap((key): Span[][] => {
@@ -549,7 +541,7 @@ export function spansOf(cost: Cost, shown: readonly Field[] = DEFAULT_FIELDS): S
       case 'effort':
         return cost.effort != null ? [[{ text: effortName(cost.effort) }]] : []
       case 'usd':
-        return cost.usd !== null ? [[{ text: dollars(cost.usd), color: heat(cost.usd, USD_WARM, USD_HOT) }]] : []
+        return cost.usd !== null ? [[{ text: dollars(cost.usd) }]] : []
       case 'session':
         return cost.sessionUsd != null ? [[{ text: `session ${dollars(cost.sessionUsd)}` }]] : []
       case 'time':

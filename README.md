@@ -8,7 +8,7 @@
 
 A Claude Code mod that signs every reply with what it cost: an estimated price in dollars, how long it took, the tokens it used, and more you can pick, one of them just for fun.
 
-It stays neutral: everything is grey, and the price only takes color when that reply weighed.
+It stays neutral: everything is grey, whatever the price.
 
 ## What it shows
 
@@ -36,10 +36,6 @@ From left to right:
 The smallest price reads `$0.01`. For your session and weekly limits, see [Quiet Token Bar](https://github.com/arthurglaizal/quiet-token-bar).
 
 On the desktop app the line is drawn small, like Quiet Model's signature. In the terminal it is plain dim text.
-
-### When it takes color
-
-Only the price, in orange from $1 a reply, in red from $5.
 
 ## How to use
 

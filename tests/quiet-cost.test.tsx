@@ -102,12 +102,10 @@ describe('quiet-cost', () => {
     expect(costOf({ usd: null, tokens: 1 }, 2).usd).toBeNull()
   })
 
-  test('only the figure that weighs is colored', () => {
+  test('the line stays grey, whatever the price', () => {
     const calm = spansOf({ model: null, sessionUsd: 3, tools: 0, usd: 0.42, durationMs: 90_000, tokens: 186_200 })
     expect(calm).toEqual([{ text: '$0.42 · 1m 30s · 186k tokens' }])
-    // A reply past $1 is worth a glance, past $5 more so: its price alone takes the color.
-    expect(spansOf({ model: null, sessionUsd: 2, tools: 0, usd: 2, durationMs: 0, tokens: 10 })).toEqual([{ text: '$2.00', color: '#e08a3c' }, { text: ' · 10 tokens' }])
-    expect(spansOf({ model: null, sessionUsd: 9, tools: 0, usd: 6, durationMs: 0, tokens: 10 })[0]?.color).toBe('#e5534b')
+    expect(spansOf({ model: null, sessionUsd: 9, tools: 0, usd: 6, durationMs: 0, tokens: 10 })).toEqual([{ text: '$6.00 · 10 tokens' }])
     expect(lineSvg([{ text: '<$0.01 · 5 tokens' }])).toContain('&lt;$0.01')
     expect(spell({ model: null, sessionUsd: 3, tools: 0, usd: 0.42, durationMs: 40_000, tokens: 1234 }, ['usd', 'time', 'tokens', 'snail'])).toBe(
       'This reply cost about $0.42 at list price, 40s of work, 1,234 new tokens, a snail crawling 4 cm',
