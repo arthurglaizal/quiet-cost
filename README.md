@@ -67,7 +67,11 @@ The switch turns the line on or off. Click a figure to show or hide it, and use 
 ## What it runs and keeps
 
 - **No network requests, no commands.** It only reads the cost, time and tokens Claude Code already counts. Nothing is changed or sent.
-- **Hooks**: `command.run` (only `/quiet-cost`), `turn.start`, `turn.complete` and `turn.step` (read the cost, time and tokens), `ui.render` (draws the line and the row), `session.start` (registers `/quiet-cost`).
+- **Hooks**:
+  - `command.run`, only for `/quiet-cost`: opens or closes the row and answers the command itself. It never sees or changes any other command, its own or another plugin's.
+  - `turn.start`, `turn.step` and `turn.complete`: read the session's cost, the token counts and how long the reply took. Nothing is changed.
+  - `ui.render`: draws the line under each reply, and the row above the prompt while it is open.
+  - `session.start`: registers `/quiet-cost` and loads your saved settings.
 - **Kept on your machine**: whether the line is on, the figures it shows and their order. Nothing about a reply is written to disk.
 
 ## Repository structure
