@@ -423,7 +423,7 @@ export function fullOrder(kept: readonly string[]): Field[] {
 }
 
 // The figures the line shows, in its order.
-export const lineFields = (sequence: readonly Field[], on: readonly Field[]) => sequence.filter(k => on.includes(k))
+export const lineFields = (sequence: readonly Field[], shown: readonly Field[]) => sequence.filter(k => shown.includes(k))
 
 // Shows or hides one figure of the line, here and in the next sessions.
 async function pick($: EngineInterface, key: Field) {
@@ -649,9 +649,9 @@ const svgOpen = (width: number, height: number) =>
 // off, the knob to the left of a dark track.
 export function switchSvg(name: string, isOn: boolean, width: number) {
   const w = Math.round(width)
-  const h = SWITCH_HEIGHT
+  const height = SWITCH_HEIGHT
   const state = isOn ? 'on' : 'off'
-  return `${svgOpen(w, h)}<rect x="0" y="${h / 2 - 6}" width="${SWITCH_WIDTH}" height="12" rx="6" fill="${TRACK[state]}"/><circle cx="${isOn ? SWITCH_WIDTH - 6 : 6}" cy="${h / 2}" r="4" fill="${KNOB[state]}"/><text x="${SWITCH_WIDTH + SWITCH_GAP}" y="${h / 2 + 4}" fill="${isOn ? ON : TEXT}">${name}</text></svg>`
+  return `${svgOpen(w, height)}<rect x="0" y="${height / 2 - 6}" width="${SWITCH_WIDTH}" height="12" rx="6" fill="${TRACK[state]}"/><circle cx="${isOn ? SWITCH_WIDTH - 6 : 6}" cy="${height / 2}" r="4" fill="${KNOB[state]}"/><text x="${SWITCH_WIDTH + SWITCH_GAP}" y="${height / 2 + 4}" fill="${isOn ? ON : TEXT}">${name}</text></svg>`
 }
 
 // The air above the row, in px.
@@ -668,9 +668,9 @@ export function dataSvg() {
 // side keep a little air between them. Muted while the line is off.
 export function chipSvg(name: string, isOn: boolean, isMuted: boolean, width: number) {
   const w = Math.round(width)
-  const h = SWITCH_HEIGHT
-  const chip = isOn ? `<rect x="${CHIP_INSET}" y="0" width="${w - 2 * CHIP_INSET}" height="${h}" rx="4" fill="${CHIP}"/>` : ''
-  return `${svgOpen(w, h)}<g${isMuted ? ` opacity="${MUTED}"` : ''}>${chip}<text x="${w / 2}" y="${h / 2 + 4}" text-anchor="middle" fill="${isOn ? ON : TEXT}"${isOn ? ` font-size="${ON_FONT}"` : ''}>${name}</text></g></svg>`
+  const height = SWITCH_HEIGHT
+  const chip = isOn ? `<rect x="${CHIP_INSET}" y="0" width="${w - 2 * CHIP_INSET}" height="${height}" rx="4" fill="${CHIP}"/>` : ''
+  return `${svgOpen(w, height)}<g${isMuted ? ` opacity="${MUTED}"` : ''}>${chip}<text x="${w / 2}" y="${height / 2 + 4}" text-anchor="middle" fill="${isOn ? ON : TEXT}"${isOn ? ` font-size="${ON_FONT}"` : ''}>${name}</text></g></svg>`
 }
 
 // The empty label that makes a button span `cols` cells: em spaces are as wide as the app's text size,
