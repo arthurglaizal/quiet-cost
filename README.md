@@ -104,6 +104,7 @@ The Quiet mods share one design: grey by default, color only when something need
 | --- | --- |
 | [Quiet Token Bar](https://github.com/arthurglaizal/quiet-token-bar) | Your context window in one quiet line: a patterned bar, a compact button and your session and weekly limits, grey until something gets warm. |
 | [Quiet Model](https://github.com/arthurglaizal/quiet-model) | Pick the model and effort in one quiet grey row. Or let Magic Router choose for each message. |
+| [Quiet Server](https://github.com/arthurglaizal/quiet-server) | Launch your servers without leaving the conversation and catch the ones still running elsewhere: a count in the status line, the details in a pane. |
 
 ## Support
 
